@@ -1,6 +1,6 @@
 import CardInnerWrapper from '@/components/CardInnerWrapper'
 import ChatForm from './ChatForm'
-import { getMessageThread } from '@/app/actions/message.actions'
+import { getMessageThread } from '@/app/actions/messageActions'
 
 export default async function ChatPage({
   params

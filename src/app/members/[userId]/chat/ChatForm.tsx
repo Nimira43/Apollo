@@ -1,6 +1,6 @@
 'use client'
 
-import { createMessage } from '@/app/actions/message.actions'
+import { createMessage } from '@/app/actions/messageActions'
 import { messageSchema, MessageSchema } from '@/lib/schemas/messageSchema'
 import { handleFormServerErrors } from '@/lib/util'
 import { zodResolver } from '@hookform/resolvers/zod'
