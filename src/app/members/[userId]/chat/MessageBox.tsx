@@ -22,14 +22,67 @@ export default function MessageBox({
     />
   )
 
+  const messageContentClasses = clsx(
+    'flex flex-col w-[50%] px-2 py-1',
+    {
+      'rounded-l-xl rounded-tr-xl bg-yellow-100': isCurrentUserSender,
+      'rounded-r-xl rounded-tl-xl bg-grey-4': !isCurrentUserSender
+    }
+  )
+
+  const renderMessageHeader = () => (
+    <div className={
+      clsx(
+        'flex items-center w-full',
+        {'justify-between': isCurrentUserSender}
+      )
+    }>
+      
+      {message.dateRead && message.recipientId !== currentUserId
+        ? (
+          <span className='text-xs text-dark text-italic'>
+            Read 4 mins ago
+          </span>
+        ) : (
+          <div></div>  
+        )
+      }
+
+      <div className='flex items-center'>
+        <span className='text-sm font-medium text-main'>
+          {message.senderName}
+        </span>
+        <span className='text-xs font-light text-grey-1 ml-2'>
+          {message.created}
+        </span>
+      </div>
+    </div>
+  )
+
+  const renderMessageContent = () => {
+    return (
+      <div className={messageContentClasses}>
+        {renderMessageHeader()}
+        <p className='text-sm py-3 text-dark'>
+          {message.text}
+        </p>
+      </div>
+    )
+  }
+
   return (
     <div className='grid grid-rows-1'>
-      <div className={clsx('flex gap-2 mb-3', {
-        'justify-end text-right': isCurrentUserSender,
-        'justify-start': !isCurrentUserSender
-      })}>
+      <div className={
+        clsx(
+          'flex gap-2 mb-3',
+          {
+            'justify-end text-right': isCurrentUserSender,
+            'justify-start': !isCurrentUserSender
+          }
+        )
+      }>
         {!isCurrentUserSender && renderAvatar()}
-        <div>Message content</div>
+        {renderMessageContent()}
         {isCurrentUserSender && renderAvatar()}
       </div>
     </div>
